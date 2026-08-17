@@ -1,40 +1,11 @@
 // ========== КОНФИГУРАЦИЯ ==========
-// Зашифрованный вебхук и ключ
-const ENCRYPTED_WEBHOOK = 'BQwVQxlWXUkCUBwMCRtcHRUfXh4PSQRXFlYIBB0JDUpAXlNaAApCSQsDXQtfTVQAWFhBUUkBKxUDHXBiBiZ9VVx1WCkudAk4ERQ1XyAHVz96BTgKckUafAIvB2wLQTEXNmE7Xws6VWITR3xSKVIONRh2CwtBByNbAQ=='; 
-const ENCRYPTION_KEY = 'edwlgeps52pwlrhhgfdk7'; 
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1538949823225532437/8DzetHQpVNd2L5QOGcTcrSfOh1VB6NzAttEoWf_a-CqPXT0mSmQe7OcGkcMyEag3aEbn';
 
-// ========== ФУНКЦИИ РАСШИФРОВКИ ==========
-function decryptWebhook(encrypted, key) {
-    try {
-        let decoded = atob(encrypted);
-        let decrypted = '';
-        for (let i = 0; i < decoded.length; i++) {
-            decrypted += String.fromCharCode(decoded.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-        }
-        return decrypted;
-    } catch (e) {
-        console.error('Ошибка расшифровки:', e);
-        return null;
-    }
-}
-
-// Получаем реальный вебхук при загрузке
-const DISCORD_WEBHOOK_URL = ENCRYPTED_WEBHOOK && ENCRYPTION_KEY 
-    ? decryptWebhook(ENCRYPTED_WEBHOOK, ENCRYPTION_KEY)
-    : null;
-
-console.log('🔐 Вебхук загружен и расшифрован');
+console.log('✅ Вебхук загружен');
 
 // ========== ОБРАБОТЧИК ФОРМЫ ==========
 document.getElementById('applicationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // Проверка вебхука
-    if (!DISCORD_WEBHOOK_URL) {
-        console.error('❌ Вебхук не настроен!');
-        showError('Ошибка конфигурации. Обратитесь к администратору.');
-        return;
-    }
 
     const submitBtn = document.querySelector('.submit-btn');
     const successMessage = document.getElementById('successMessage');
@@ -142,11 +113,12 @@ document.getElementById('applicationForm').addEventListener('submit', async (e) 
             
             // Scroll to message
             successMessage.scrollIntoView({ behavior: 'smooth' });
+            console.log('✅ Заявка отправлена в Discord');
         } else {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('❌ Ошибка:', error);
         showError('Ошибка при отправке заявки. Попробуйте позже или обратитесь к администратору.');
     } finally {
         // Re-enable button
@@ -173,7 +145,7 @@ function validateForm(formData) {
         }
     }
 
-    // Проверка возраста
+    // Пров��рка возраста
     if (formData.age < 1 || formData.age > 120) {
         showError('Введите корректный возраст (от 1 до 120)!');
         return false;
@@ -222,4 +194,4 @@ document.querySelectorAll('input, select').forEach(element => {
 
 console.log('📋 Application form loaded successfully!');
 console.log('🎮 NEXUS Application System Ready');
-console.log('🔐 Webhook encryption enabled!');
+console.log('✅ Direct webhook mode enabled!');
