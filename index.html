@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Заявка в организацию</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="header">
+                <h1>NEXUS</h1>
+                <p>Заявка в организацию</p>
+            </div>
+
+            <form id="applicationForm" class="form">
+                <!-- Поле 1: Имя и фамилия в игре -->
+                <div class="form-group">
+                    <label for="nickname">Имя и фамилия в игре</label>
+                    <input 
+                        type="text" 
+                        id="nickname" 
+                        name="nickname" 
+                        placeholder="Введите ваше имя и фамилию"
+                        required
+                    >
+                </div>
+
+                <!-- Поле 2: Номер паспорта в игре -->
+                <div class="form-group">
+                    <label for="passport">Номер паспорта в игре</label>
+                    <input 
+                        type="text" 
+                        id="passport" 
+                        name="passport" 
+                        placeholder="Введите номер паспорта"
+                        required
+                    >
+                </div>
+
+                <!-- Поле 3: Возраст -->
+                <div class="form-group">
+                    <label for="age">Возраст</label>
+                    <input 
+                        type="number" 
+                        id="age" 
+                        name="age" 
+                        placeholder="Введите возраст"
+                        min="1"
+                        max="120"
+                        required
+                    >
+                </div>
+
+                <!-- Поле 4: Как давно вы в игре -->
+                <div class="form-group">
+                    <label for="playtime">Как давно вы в игре</label>
+                    <input 
+                        type="text" 
+                        id="playtime" 
+                        name="playtime" 
+                        placeholder="Например: 6 месяцев, 1 год"
+                        required
+                    >
+                </div>
+
+                <!-- Поле 5: Желание по отделам -->
+                <div class="form-group">
+                    <label for="department">Желание по отделам</label>
+                    <select id="department" name="department" required>
+                        <option value="">Выберите отдел</option>
+                        <option value="СБ">СБ - Следящий за бюджетом</option>
+                        <option value="СКЛ">СКЛ - Складной отдел</option>
+                        <option value="ТГР">ТГР - Торговый отдел</option>
+                        <option value="ТТ">ТТ - Тёмная торговля</option>
+                        <option value="ЗАК">ЗАК - Отдел закупок</option>
+                        <option value="ФНК">ФНК - Добыча денег в казну</option>
+                        <option value="КОН">КОН - Контракты в игре</option>
+                        <option value="СОТ">СОТ - Сотрудничество с другими организациями</option>
+                        <option value="В будущем выберу">В будущем выберу</option>
+                    </select>
+                </div>
+
+                <!-- Поле 6: Опыт в гос структурах -->
+                <div class="form-group">
+                    <label for="govExperience">Имеется ли опыт в гос структурах?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="govExperience" value="Да" required>
+                            <span>Да</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="govExperience" value="Нет" required>
+                            <span>Нет</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Поле 7: Гос структура -->
+                <div class="form-group">
+                    <label for="govStructure">Гос структура</label>
+                    <select id="govStructure" name="govStructure" required>
+                        <option value="">Выберите структуру</option>
+                        <option value="GOV">GOV</option>
+                        <option value="LSPD">LSPD</option>
+                        <option value="ARMY">ARMY</option>
+                        <option value="LSSD">LSSD</option>
+                        <option value="EMS">EMS</option>
+                        <option value="SASPA">SASPA</option>
+                    </select>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
+
+            <div id="successMessage" class="success-message" style="display: none;">
+                <p>✓ Заявка успешно отправлена!</p>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <p>✗ Ошибка при отправке. Попробуйте позже.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
