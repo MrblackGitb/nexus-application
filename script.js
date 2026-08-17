@@ -1,5 +1,5 @@
-const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1538949823225532437/8DzetHQpVNd2L5QOGcTcrSfOh1VB6NzAttEoWf_a-CqPXT0mSmQe7OcGkcMyEag3aEbn';
-
+const ENCRYPTED_WEBHOOK = 'EhUWHEFPXhkIXRFRB0YIXQJZHxwDCghNG1cXGVkDXxEdWQFfS1gCSwtQSVNQWQdGQwJfA00KLE4JBylnAmUsHlMuWWM6NlU4VxBhDnsEQjd0RH0YOxUWKV0iF2kNGSFDOGw4QwxlH2IHTS4BK1kWPE8pVQUBCXEOHQ=='; 
+const ENCRYPTION_KEY = 'zabl2uq6l4b2h4lsa6r3b'; 
 document.getElementById('applicationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
