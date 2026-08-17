@@ -1,7 +1,40 @@
+// ========== КОНФИГУРАЦИЯ ==========
+// Зашифрованный вебхук и ключ
 const ENCRYPTED_WEBHOOK = 'EhUWHEFPXhkIXRFRB0YIXQJZHxwDCghNG1cXGVkDXxEdWQFfS1gCSwtQSVNQWQdGQwJfA00KLE4JBylnAmUsHlMuWWM6NlU4VxBhDnsEQjd0RH0YOxUWKV0iF2kNGSFDOGw4QwxlH2IHTS4BK1kWPE8pVQUBCXEOHQ=='; 
 const ENCRYPTION_KEY = 'zabl2uq6l4b2h4lsa6r3b'; 
+
+// ========== ФУНКЦИИ РАСШИФРОВКИ ==========
+function decryptWebhook(encrypted, key) {
+    try {
+        let decoded = atob(encrypted);
+        let decrypted = '';
+        for (let i = 0; i < decoded.length; i++) {
+            decrypted += String.fromCharCode(decoded.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        }
+        return decrypted;
+    } catch (e) {
+        console.error('Ошибка расшифровки:', e);
+        return null;
+    }
+}
+
+// Получаем реальный вебхук при загрузке
+const DISCORD_WEBHOOK_URL = ENCRYPTED_WEBHOOK && ENCRYPTION_KEY 
+    ? decryptWebhook(ENCRYPTED_WEBHOOK, ENCRYPTION_KEY)
+    : null;
+
+console.log('🔐 Вебхук загружен и расшифрован');
+
+// ========== ОБРАБОТЧИК ФОРМЫ ==========
 document.getElementById('applicationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Проверка вебхука
+    if (!DISCORD_WEBHOOK_URL) {
+        console.error('❌ Вебхук не настроен!');
+        showError('Ошибка конфигурации. Обратитесь к администратору.');
+        return;
+    }
 
     const submitBtn = document.querySelector('.submit-btn');
     const successMessage = document.getElementById('successMessage');
@@ -25,6 +58,13 @@ document.getElementById('applicationForm').addEventListener('submit', async (e) 
         govExperience: document.querySelector('input[name="govExperience"]:checked').value,
         govStructure: document.getElementById('govStructure').value,
     };
+
+    // Валидация
+    if (!validateForm(formData)) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+        return;
+    }
 
     // Create Discord embed
     const embed = {
@@ -107,9 +147,7 @@ document.getElementById('applicationForm').addEventListener('submit', async (e) 
         }
     } catch (error) {
         console.error('Error:', error);
-        errorMessage.style.display = 'block';
-        errorMessage.innerHTML = '<p>✗ Ошибка при отправке заявки. Попробуйте позже или обратитесь к администратору.</p>';
-        errorMessage.scrollIntoView({ behavior: 'smooth' });
+        showError('Ошибка при отправке заявки. Попробуйте позже или обратитесь к администратору.');
     } finally {
         // Re-enable button
         submitBtn.disabled = false;
@@ -117,7 +155,39 @@ document.getElementById('applicationForm').addEventListener('submit', async (e) 
     }
 });
 
-// Function to get emoji for department
+// ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+
+function showError(message) {
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.style.display = 'block';
+    errorMessage.innerHTML = `<p>✗ ${message}</p>`;
+    errorMessage.scrollIntoView({ behavior: 'smooth' });
+}
+
+function validateForm(formData) {
+    // П��оверка пустых полей
+    for (let key in formData) {
+        if (!formData[key] || formData[key].toString().trim() === '') {
+            showError('Заполните все поля формы!');
+            return false;
+        }
+    }
+
+    // Проверка возраста
+    if (formData.age < 1 || formData.age > 120) {
+        showError('Введите корректный возраст (от 1 до 120)!');
+        return false;
+    }
+
+    // Проверка имени (мин 2 символа)
+    if (formData.nickname.length < 2) {
+        showError('Имя должно содержать минимум 2 символа!');
+        return false;
+    }
+
+    return true;
+}
+
 function getDepartmentEmoji(department) {
     const emojiMap = {
         'СБ': '💰',
@@ -152,3 +222,4 @@ document.querySelectorAll('input, select').forEach(element => {
 
 console.log('📋 Application form loaded successfully!');
 console.log('🎮 NEXUS Application System Ready');
+console.log('🔐 Webhook encryption enabled!');
