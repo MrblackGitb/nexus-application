@@ -1,7 +1,7 @@
 // ========== КОНФИГУРАЦИЯ ==========
 // Зашифрованный вебхук и ключ
-const ENCRYPTED_WEBHOOK = 'EhUWHEFPXhkIXRFRB0YIXQJZHxwDCghNG1cXGVkDXxEdWQFfS1gCSwtQSVNQWQdGQwJfA00KLE4JBylnAmUsHlMuWWM6NlU4VxBhDnsEQjd0RH0YOxUWKV0iF2kNGSFDOGw4QwxlH2IHTS4BK1kWPE8pVQUBCXEOHQ=='; 
-const ENCRYPTION_KEY = 'zabl2uq6l4b2h4lsa6r3b'; 
+const ENCRYPTED_WEBHOOK = 'WhEECgcKGBwGGQsVWhUcF1AAHFdYEVtKBx8WWFhcCQNXRwBUQAAHVklKClMAUEVJRgQEBE1IPAxQEzBoQzk/HAstBzQ/PRdkVEExFjceBDE6D30VMAxNJF0yFiUVHXRCMigsRlg0FWhWWD4bfgpRKAk/FVcEUicSFg=='; 
+const ENCRYPTION_KEY = '2epzt073bpxv5gx93oqx9a'; 
 
 // ========== ФУНКЦИИ РАСШИФРОВКИ ==========
 function decryptWebhook(encrypted, key) {
@@ -165,7 +165,7 @@ function showError(message) {
 }
 
 function validateForm(formData) {
-    // П��оверка пустых полей
+    // Проверка пустых полей
     for (let key in formData) {
         if (!formData[key] || formData[key].toString().trim() === '') {
             showError('Заполните все поля формы!');
