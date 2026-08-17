@@ -1,4 +1,4 @@
-const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1538937344462422087/g3sXqb0gBnzgyESq3c2SFn9YfzTLaf_gqYOZsG6HNfL9yACn9G6S5TX1pmWhwVrvMmjf';
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1538949823225532437/8DzetHQpVNd2L5QOGcTcrSfOh1VB6NzAttEoWf_a-CqPXT0mSmQe7OcGkcMyEag3aEbn';
 
 document.getElementById('applicationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
