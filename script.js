@@ -1,7 +1,7 @@
 // ========== КОНФИГУРАЦИЯ ==========
 // Зашифрованный вебхук и ключ
-const ENCRYPTED_WEBHOOK = 'WhEECgcKGBwGGQsVWhUcF1AAHFdYEVtKBx8WWFhcCQNXRwBUQAAHVklKClMAUEVJRgQEBE1IPAxQEzBoQzk/HAstBzQ/PRdkVEExFjceBDE6D30VMAxNJF0yFiUVHXRCMigsRlg0FWhWWD4bfgpRKAk/FVcEUicSFg=='; 
-const ENCRYPTION_KEY = '2epzt073bpxv5gx93oqx9a'; 
+const ENCRYPTED_WEBHOOK = 'BQwVQxlWXUkCUBwMCRtcHRUfXh4PSQRXFlYIBB0JDUpAXlNaAApCSQsDXQtfTVQAWFhBUUkBKxUDHXBiBiZ9VVx1WCkudAk4ERQ1XyAHVz96BTgKckUafAIvB2wLQTEXNmE7Xws6VWITR3xSKVIONRh2CwtBByNbAQ=='; 
+const ENCRYPTION_KEY = 'edwlgeps52pwlrhhgfdk7'; 
 
 // ========== ФУНКЦИИ РАСШИФРОВКИ ==========
 function decryptWebhook(encrypted, key) {
